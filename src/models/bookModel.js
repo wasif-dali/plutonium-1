@@ -1,15 +1,8 @@
-const mongoose=require('mongoose')
+const mongoose = require('mongoose')
+const ObjectId = mongoose.Schema.Types.ObjectId
 
 const bookSchema= new mongoose.Schema({
 
-//String
-//Number
-// Boolean
-// Array
-// Object
-// Date
-// Buffer
-// ObjectId
 
     bookName: {
         type: String,
@@ -20,7 +13,10 @@ const bookSchema= new mongoose.Schema({
         required: true,
         unique: true
     },
-    author: String,
+    author: {
+        type: ObjectId,
+        ref: 'Author'
+    },
     tags: [ String ], //array of strings 
     year: {type: Number, default: 2021},
     isPublished: {
@@ -54,5 +50,5 @@ const bookSchema= new mongoose.Schema({
 
 }, {timestamps: true} )
 
-module.exports = mongoose.model( 'Book', bookSchema ) 
+module.exports = mongoose.model( 'Book1', bookSchema ) 
 
