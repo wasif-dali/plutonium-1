@@ -1,29 +1,32 @@
-const bookModel = require("../models/bookModel.js");
-const mongoose = require("mongoose");
+const authorModel = require("../models/authorModel");
+const publisherModel = require("../models/publisherModel");
+const bookModel = require("../models/bookModel");
 
 const createBook = async function (req, res) {
-  const book = req.body;
-  let savedBook = await bookModel.create(book);
-  res.send({ msg: savedBook });
+  let data = req.body;
+  let authorId = req.body.author;
+  let publisherId = req.body.publisher;
+
+  //Check if the author in request is a valid author
+  let authorFromRequest = await authorModel.findById(authorId);
+  //Check if the publisher in request is a valid publisher
+  let publisherFromRequest = await publisherModel.findById(publisherId);
+
+  if (!authorFromRequest) {//if no author found
+    res.send("The author Id provided is not valid.");
+  } else if (!publisherFromRequest) {//if no publisher found
+    res.send("The publisher Id provided is not valid.");
+  } else {
+    //both author and publisher exist and are thus valid
+    let bookCreated = await bookModel.create(data);
+    res.send({ data: bookCreated });
+  }
 };
 
 const getBooks = async function (req, res) {
-  let allBooks = await bookModel.find().populate('author');
-  res.send({ msg: allBooks });
+  let allBooks = await bookModel.find().populate("author", "author_name age").populate("publisher");
+  res.send(allBooks);
 };
-
-const getBook = async function (req, res) {
-  let book = await bookModel.findOne (  {sales: {$gt: 5000000} });
-//   if (book.length != 0 ) {
-    if (book ) { // any value present (except falsey) gets evaluated as true... null, 0  automatically defaults to false
-      console.log("HI I FOUND A BOOK")
-  }
-  else console.log("NO BOOK FOUND")
-  res.send( book );
-};
-
 
 module.exports.createBook = createBook;
 module.exports.getBooks = getBooks;
-module.exports.getBook = getBook;
-
