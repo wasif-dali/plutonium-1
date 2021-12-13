@@ -7,6 +7,7 @@ const publisherController = require('../controllers/publisherController')
 
 // Author api
 router.post('/authors', authorController.createAuthor)
+router.get('/authors/:authorId', authorController.fetchAuthorProfile)
 
 // Book api
 router.post('/books', bookController.createBook)
