@@ -5,11 +5,11 @@ const { promisify } = require("util");
 
 //Connect to redis
 const redisClient = redis.createClient(
-  10337,
-  "redis-10337.c264.ap-south-1-1.ec2.cloud.redislabs.com",
+  13190,
+  "redis-13190.c301.ap-south-1-1.ec2.cloud.redislabs.com",
   { no_ready_check: true }
 );
-redisClient.auth("6L8SXmAlBLG8Z55VsrQtoTd1ugZZ6Qci", function (err) {
+redisClient.auth("gkiOIPkytPI3ADi14jHMSWkZEo2J5TDG", function (err) {
   if (err) throw err;
 });
 
@@ -45,6 +45,6 @@ const fetchAuthorProfile = async function (req, res) {
   }
 
 };
-
+``
 module.exports.createAuthor = createAuthor;
 module.exports.fetchAuthorProfile = fetchAuthorProfile;
