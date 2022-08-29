@@ -5,7 +5,7 @@
 - Token verification
 
 ## Assignment
-- For this assignment you have to create a new branch - assignment/auth-
+- For this assignment you have to create a new branch - assignment/auth-1
 - Your user document should look like this
 ```
  	{
