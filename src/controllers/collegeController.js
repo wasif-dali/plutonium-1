@@ -7,8 +7,8 @@ let createCollege = async function (req, res) {
             let college = await collegeModel.create(req.body)
             res.status(201).send({ status: true, data: college })
         } else {
-            //handles null/undefined/empty request body
-            res.status(400).send({ status: false, msg: 'Request must contain a valid body' })
+             //handles null/undefined/empty request body
+           res.status(400).send({ status: false, msg: 'Request must contain a valid body' })
         }
     } catch (error) {
         res.status(500).send({ status: false, msg: error.message })
